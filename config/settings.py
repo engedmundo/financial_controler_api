@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,6 +31,9 @@ INSTALLED_APPS = [
     # "rest_framework",
     # project apps
     "apps.core",
+    "apps.family_manager",
+    "apps.account_manager",
+    "apps.financial_manager",
 ]
 
 MIDDLEWARE = [
