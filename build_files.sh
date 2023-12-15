@@ -1,4 +1,7 @@
 # build_files.sh
+
+#!/bin/bash
+
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
-# python3.9 manage.py collectstatic
+python3 manage.py collectstatic
