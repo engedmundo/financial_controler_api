@@ -14,3 +14,8 @@ class BudgetAdmin(admin.ModelAdmin):
         "type",
         "description",
     ]
+
+    list_filter = (
+        "month",
+        "year",
+    )

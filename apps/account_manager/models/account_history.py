@@ -17,7 +17,7 @@ class AccountHistory(BaseModel):
     )
     account = models.ForeignKey(
         Account,
-        verbose_name="Banco",
+        verbose_name="Conta",
         on_delete=models.PROTECT,
     )
     date = models.DateField(

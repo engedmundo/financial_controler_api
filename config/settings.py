@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # 3rd apps
+    "rangefilter",
     # "rest_framework",
     # project apps
     "apps.core",
