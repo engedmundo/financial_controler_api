@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     # 3rd apps
     "rest_framework",
     "rest_framework_simplejwt",
+    "corsheaders",
     # project apps
     "apps.core",
     "apps.family_manager",
@@ -35,6 +36,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -100,6 +102,10 @@ SIMPLE_JWT = {
     "SIGNING_KEY": config("JWT_SECRET_KEY"),
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 
 LANGUAGE_CODE = "pt-br"
 
