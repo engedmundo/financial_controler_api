@@ -14,4 +14,3 @@ class AuthURLTest(TestCase):
     def test_token_verify_url_resolves(self):
         url = reverse("token_verify")
         self.assertEqual(url, "/api/token/verify/")
-

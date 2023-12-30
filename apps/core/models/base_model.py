@@ -7,7 +7,7 @@ class BaseModel(models.Model):
         auto_now_add=True,
         editable=False,
     )
-    update_at = models.DateTimeField(
+    updated_at = models.DateTimeField(
         verbose_name="Atualização",
         auto_now=True,
         editable=False,
