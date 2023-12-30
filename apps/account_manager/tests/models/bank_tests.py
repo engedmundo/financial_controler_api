@@ -18,7 +18,7 @@ class BankModelTests(BaseModelsTest):
 
         # When
         bank_instance = BankFactory(
-            name=expected_name, 
+            name=expected_name,
             code=expected_code,
         )
 

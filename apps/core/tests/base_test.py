@@ -5,8 +5,11 @@ from rest_framework.test import APIClient
 
 class BaseModelsTest(TestCase):
     def assertHasAttr(self, obj, attr):
-        self.assertTrue(hasattr(obj, attr), f"{obj.__class__.__name__} does not have attribute {attr}")
-    
+        self.assertTrue(
+            hasattr(obj, attr),
+            f"{obj.__class__.__name__} does not have attribute {attr}",
+        )
+
 
 class BaseTest(TestCase):
     def setUp(self):

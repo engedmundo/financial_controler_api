@@ -11,12 +11,12 @@ class BankViewSetTest(BaseTest):
         bank_1 = BankFactory()
         bank_2 = BankFactory()
         expected_data = [
-            {'id': bank.id, 'name': bank.name, 'code': bank.code} 
+            {"id": bank.id, "name": bank.name, "code": bank.code}
             for bank in [bank_1, bank_2]
-            ]
-        
+        ]
+
         # When
-        response = self.auth_client.get('/api/banks/')
+        response = self.auth_client.get("/api/banks/")
         response_data = response.data
 
         # Then
@@ -28,9 +28,9 @@ class BankViewSetTest(BaseTest):
     def test_get_banks_unauthenticated(self):
         # Given
         expected_message = "As credenciais de autenticação não foram fornecidas."
-        
+
         # When
-        response = APIClient().get('/api/banks/')
+        response = APIClient().get("/api/banks/")
 
         # Then
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

@@ -3,7 +3,8 @@ from faker import Faker
 
 from apps.account_manager.models.bank import Bank
 
-fake = Faker('pt_BR')
+fake = Faker("pt_BR")
+
 
 class BankFactory(factory.django.DjangoModelFactory):
     name = fake.company()

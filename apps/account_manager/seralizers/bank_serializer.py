@@ -6,4 +6,4 @@ from apps.account_manager.models import Bank
 class BankSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bank
-        fields = ['id', 'name', 'code']
+        fields = ["id", "name", "code"]
