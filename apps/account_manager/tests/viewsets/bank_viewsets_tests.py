@@ -4,6 +4,8 @@ from rest_framework.test import APIClient
 from apps.account_manager.tests.factories import BankFactory
 from apps.core.tests.base_test import BaseTest
 
+TEST_ENDPOINT = "/api/banks/"
+
 
 class BankViewSetTest(BaseTest):
     def test_get_banks_authenticated(self):
@@ -16,7 +18,7 @@ class BankViewSetTest(BaseTest):
         ]
 
         # When
-        response = self.auth_client.get("/api/banks/")
+        response = self.auth_client.get(TEST_ENDPOINT)
         response_data = response.data
 
         # Then
@@ -30,7 +32,7 @@ class BankViewSetTest(BaseTest):
         expected_message = "As credenciais de autenticação não foram fornecidas."
 
         # When
-        response = APIClient().get("/api/banks/")
+        response = APIClient().get(TEST_ENDPOINT)
 
         # Then
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
