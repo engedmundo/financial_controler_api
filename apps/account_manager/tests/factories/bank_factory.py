@@ -8,7 +8,7 @@ fake = Faker("pt_BR")
 
 class BankFactory(factory.django.DjangoModelFactory):
     name = fake.company()
-    code = fake.random_number(digits=3)
+    code = str(fake.random_number(digits=3))
 
     class Meta:
         model = Bank
