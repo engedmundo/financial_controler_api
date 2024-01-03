@@ -1,0 +1,1 @@
+from .user_simple_serializer import UserSimpleSerializer

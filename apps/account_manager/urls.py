@@ -10,11 +10,11 @@ from apps.account_manager.viewsets import (
 
 router = DefaultRouter()
 router.register(r"account-histories", AccountHistoryViewSet, basename="account-history")
-router.register(r"accounts", AccountViewSet, basename="account")
 router.register(r"credit-cards", CreditCardViewSet, basename="credit-card")
 
 urlpatterns = [
     path("banks/", BankViewSet.as_view(), name="bank-list"),
+    path("accounts/", AccountViewSet.as_view(), name="accounts"),
 ]
 
 urlpatterns += router.urls
