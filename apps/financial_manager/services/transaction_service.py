@@ -1,10 +1,12 @@
-from django.db.models.query import QuerySet
 from django.db.models import Sum
+from django.db.models.query import QuerySet
+
 from apps.financial_manager.enums import FinancialTypeEnum
 from apps.financial_manager.models import Transaction
 
 
 class TransactionService:
+    @staticmethod
     def get_transactions_summary(transactions: QuerySet[Transaction]) -> dict:
         receipts = transactions.filter(type=FinancialTypeEnum.RECEIPT)
         expenses = transactions.filter(type=FinancialTypeEnum.EXPENSE)
