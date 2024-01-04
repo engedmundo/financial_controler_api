@@ -20,3 +20,15 @@ class AccountSerializer(serializers.ModelSerializer):
             "user",
             "bank",
         ]
+
+
+class AccountSimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = [
+            "id",
+            "name",
+            "agency",
+            "number",
+            "type",
+        ]

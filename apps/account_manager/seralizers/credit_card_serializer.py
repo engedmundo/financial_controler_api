@@ -19,3 +19,14 @@ class CreditCardSerializer(serializers.ModelSerializer):
             "user",
             "bank",
         ]
+
+
+class CreditCardSimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CreditCard
+        fields = [
+            "id",
+            "name",
+            "expense_limit",
+            "payment_day",
+        ]

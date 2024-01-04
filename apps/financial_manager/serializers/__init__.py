@@ -1,3 +1,3 @@
 from .budget_serializer import BudgetSerializer
-from .category_serializer import CategorySerializer
+from .category_serializer import CategorySerializer, CategorySimpleSerializer
 from .transaction_serializer import TransactionSerializer
