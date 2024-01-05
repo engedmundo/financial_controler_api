@@ -14,6 +14,7 @@ class TransactionSerializer(serializers.ModelSerializer):
     account = AccountSimpleSerializer()
     credit_card = CreditCardSimpleSerializer()
     category = CategorySimpleSerializer()
+    date = serializers.DateField(format="%d/%m/%Y")
 
     class Meta:
         model = Transaction
