@@ -12,6 +12,10 @@ class TransactionCSVViewSet(APIView):
     def post(self, request):
         user = request.user
         data = request.data
+        if not data.get("csv_file"):
+            response = {"error": "Um arquivo *.csv deve ser enviado"}
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
         service = TransactionCSVService(user, data)
         transactions_df = service.get_file_content_df()
         transactions = service.treat_content_df(transactions_df)

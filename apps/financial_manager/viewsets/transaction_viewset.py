@@ -13,12 +13,25 @@ class TransactionViewSet(APIView):
 
     def get(self, request):
         user = request.user
-        transactions = Transaction.objects.filter(user=user)
-        summary = TransactionService.get_transactions_summary(transactions)
+        query_params = request.query_params
+        filters = {"user": user}
+
+        if query_params.get("start_date"):
+            filters["date__gte"] = query_params["start_date"]
+
+        if query_params.get("end_date"):
+            filters["date__lte"] = query_params["end_date"]
+
+        transactions = Transaction.objects.filter(**filters).order_by("date")
+
+        service = TransactionService(transactions)
+        summary = service.get_transactions_summary()
+        summary_by_category = service.get_transactions_by_category_summary()
         report = TransactionSerializer(transactions, many=True).data
         response = {
             "transactions": report,
             "summary": summary,
+            "summary_by_category": summary_by_category,
         }
 
         return Response(response, status=status.HTTP_200_OK)
