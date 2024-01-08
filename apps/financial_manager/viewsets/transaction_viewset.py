@@ -26,12 +26,10 @@ class TransactionViewSet(APIView):
 
         service = TransactionService(transactions)
         summary = service.get_transactions_summary()
-        summary_by_category = service.get_transactions_by_category_summary()
         report = TransactionSerializer(transactions, many=True).data
         response = {
             "transactions": report,
             "summary": summary,
-            "summary_by_category": summary_by_category,
         }
 
         return Response(response, status=status.HTTP_200_OK)

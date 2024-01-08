@@ -15,91 +15,72 @@ class TransactionService:
     def get_transactions_summary(self) -> dict:
         total_receipt = self.receipts.aggregate(result=Sum("amount"))["result"]
         self.total_receipt = total_receipt if total_receipt else 0
+        receipts_by_category = self._get_receipts_by_category()
+
         total_expense = self.expenses.aggregate(result=Sum("amount"))["result"]
         self.total_expense = total_expense if total_expense else 0
+        expenses_by_category = self._get_expenses_by_category()
+
         balance = self.total_receipt - self.total_expense
 
         return {
-            "receipt": self.total_receipt,
-            "expense": self.total_expense,
+            "receipt": {
+                "total": self.total_receipt,
+                "categories": receipts_by_category,
+            },
+            "expense": {
+                "total": self.total_expense,
+                "categories": expenses_by_category,
+            },
             "balance": balance,
         }
 
-    def get_transactions_by_category_summary(self) -> dict:
-        receipts_by_category = self._get_receipts_by_category()
-        expenses_by_category = self._get_expenses_by_category()
-        summary_by_category = self._merge_summary_by_category_results(
-            receipts=receipts_by_category,
-            expenses=expenses_by_category,
-        )
-        return summary_by_category
-
     def _get_receipts_by_category(self) -> list:
-        receipts_by_category_qs = (
-            self.receipts.values("category__name")
-            .annotate(total=Sum("amount"))
-            .order_by("amount")
-        )
+        values_qs = self.receipts.values("category__name", "amount")
+        receipts_by_category_dict = dict()
+
+        for value in values_qs:
+            category = value["category__name"]
+            if category not in receipts_by_category_dict:
+                receipts_by_category_dict[category] = 0
+
+            receipts_by_category_dict[category] += value["amount"]
+
         receipts_by_category = [
             {
-                "category": transaction["category__name"],
-                "expense": 0,
-                "percentual_expense": 0,
-                "receipt": transaction["total"],
-                "percentual_receipt": round(
-                    transaction["total"] / self.total_receipt * 100, 2
-                ),
+                "category": category_name,
+                "total": total,
+                "percentual": self._calculate_percentual(total, self.total_receipt),
             }
-            for transaction in receipts_by_category_qs
+            for category_name, total in receipts_by_category_dict.items()
         ]
+
         return receipts_by_category
 
     def _get_expenses_by_category(self) -> list:
-        expenses_by_category_qs = (
-            self.expenses.values("category__name")
-            .annotate(total=Sum("amount"))
-            .order_by("amount")
-        )
-        expenses_by_category = [
+        values_qs = self.expenses.values("category__name", "amount")
+        expenses_by_category_dict = dict()
+
+        for value in values_qs:
+            category = value["category__name"]
+            if category not in expenses_by_category_dict:
+                expenses_by_category_dict[category] = 0
+
+            expenses_by_category_dict[category] += value["amount"]
+
+        expsenses_by_category = [
             {
-                "category": transaction["category__name"],
-                "expense": transaction["total"],
-                "percentual_expense": round(
-                    transaction["total"] / self.total_expense * 100, 2
-                ),
-                "receipt": 0,
-                "percentual_receipt": 0,
+                "category": category_name,
+                "total": total,
+                "percentual": self._calculate_percentual(total, self.total_expense),
             }
-            for transaction in expenses_by_category_qs
+            for category_name, total in expenses_by_category_dict.items()
         ]
-        return expenses_by_category
 
-    def _merge_summary_by_category_results(
-        self, receipts: list, expenses: list
-    ) -> list:
-        summaries = receipts + expenses
-        summary_dict = dict()
+        return expsenses_by_category
 
-        for item in summaries:
-            category = item["category"]
+    def _calculate_percentual(self, category_value, total_value):
+        if total_value == 0:
+            return 100
 
-            if category not in summary_dict:
-                summary_dict[category] = self._create_summary_item(category)
-
-            summary_dict[category]["expense"] += item["expense"]
-            summary_dict[category]["receipt"] += item["receipt"]
-            summary_dict[category]["percentual_expense"] += item["percentual_expense"]
-            summary_dict[category]["percentual_receipt"] += item["percentual_receipt"]
-
-        summary_by_category = list(summary_dict.values())
-        return summary_by_category
-
-    @staticmethod
-    def _create_summary_item(category) -> dict:
-        return {
-            "category": category,
-            "expense": 0,
-            "percentual_expense": 0,
-            "receipt": 0,
-            "percentual_receipt": 0,
-        }
+        return round(category_value / total_value * 100, 2)
