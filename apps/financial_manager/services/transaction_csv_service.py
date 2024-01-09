@@ -12,27 +12,27 @@ class TransactionCSVService:
     def __init__(self, user: User, request_data: dict) -> None:
         self.user = user
         self.request_data = request_data
-        self.account = self.get_account()
-        self.credit_card = self.get_credit_card()
-        self.family = self.get_family()
-        self.categories_map = self.get_categories_map()
+        self.account = self._get_account()
+        self.credit_card = self._get_credit_card()
+        self.family = self._get_family()
+        self.categories_map = self._get_categories_map()
 
-    def get_account(self) -> Account:
+    def _get_account(self) -> Account:
         return Account.objects.filter(
             user=self.user,
             id=self.request_data.get("account"),
         ).first()
 
-    def get_credit_card(self) -> CreditCard:
+    def _get_credit_card(self) -> CreditCard:
         return CreditCard.objects.filter(
             user=self.user,
             id=self.request_data.get("credit_card"),
         ).first()
 
-    def get_family(self) -> Family:
+    def _get_family(self) -> Family:
         return Family.objects.filter(members=self.user).first()
 
-    def get_categories_map(self) -> dict:
+    def _get_categories_map(self) -> dict:
         users_filter = list()
         if self.family:
             users_filter.extend(self.family.members.all())
