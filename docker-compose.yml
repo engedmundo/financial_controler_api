@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8080
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    env_file:
+      .env
+    networks:
+      - finance_network
+
+  db:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    networks:
+      - finance_network
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+networks:
+  finance_network:
+
+volumes:
+  pg_data:
