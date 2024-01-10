@@ -25,7 +25,7 @@ class CreditCard(BaseModel):
         max_length=255,
     )
     expense_limit = models.IntegerField(
-        verbose_name="Limite de crédito",
+        verbose_name="Limite de crédito R$",
         null=True,
         blank=True,
     )

@@ -1,8 +1,10 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", include("apps.core.urls")),
+    path("api/", include("apps.account_manager.urls")),
+    path("api/", include("apps.family_manager.urls")),
+    path("api/", include("apps.financial_manager.urls")),
 ]
-# urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
