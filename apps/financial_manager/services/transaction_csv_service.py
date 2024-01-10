@@ -48,16 +48,6 @@ class TransactionCSVService:
         return pd.read_csv(file_content, sep=",")
 
     def treat_content_df(self, transactions_df: pd.DataFrame) -> list:
-        # rename column names
-        columns_names = {
-            "Data": "date",
-            "Descrição": "description",
-            "Valor": "amount",
-            "Categoria": "category",
-            "Tipo": "type",
-        }
-        transactions_df.rename(columns=columns_names, inplace=True)
-
         # transform date to iso format
         transactions_df["date"] = pd.to_datetime(
             transactions_df["date"], format="%d/%m/%Y"
