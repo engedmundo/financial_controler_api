@@ -1,4 +1,5 @@
 from django.contrib import admin
+from rangefilter.filters import DateRangeFilter
 
 from apps.financial_manager.models import Transaction
 
@@ -14,3 +15,8 @@ class TransactionAdmin(admin.ModelAdmin):
         "type",
         "description",
     ]
+
+    list_filter = (
+        ("date", DateRangeFilter),
+        "date",
+    )

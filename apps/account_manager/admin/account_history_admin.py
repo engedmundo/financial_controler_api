@@ -1,4 +1,5 @@
 from django.contrib import admin
+from rangefilter.filters import DateRangeFilter
 
 from apps.account_manager.models import AccountHistory
 
@@ -16,3 +17,8 @@ class AccountHistoryAdmin(admin.ModelAdmin):
         "date",
         "balance",
     ]
+
+    list_filter = (
+        ("date", DateRangeFilter),
+        "date",
+    )
