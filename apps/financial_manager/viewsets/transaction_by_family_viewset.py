@@ -6,8 +6,7 @@ from rest_framework.views import APIView
 from apps.family_manager.models import Family
 from apps.financial_manager.models import Transaction
 from apps.financial_manager.serializers import TransactionSerializer
-from apps.financial_manager.services.transaction_service import \
-    TransactionService
+from apps.financial_manager.services.transaction_service import TransactionService
 
 
 class TransactionByFamilyViewSet(APIView):
@@ -20,8 +19,9 @@ class TransactionByFamilyViewSet(APIView):
             members=user,
         ).first()
 
-        if not family: 
+        if not family:
             response = {"error": "Família não encontrada"}
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
 
         family_members = family.members.all()
         query_params = request.query_params

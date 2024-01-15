@@ -16,7 +16,7 @@ services:
       - finance_network
 
   db:
-    image: postgres:alpine
+    image: postgres:15
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
