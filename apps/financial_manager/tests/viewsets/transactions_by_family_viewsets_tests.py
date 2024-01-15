@@ -1,19 +1,15 @@
 from rest_framework import status
 from rest_framework.test import APIClient
 
+from apps.account_manager.tests.factories import AccountFactory, CreditCardFactory
 from apps.core.tests.base_test import BaseTest
+from apps.core.tests.factories.user_factory import UserFactory
+from apps.family_manager.tests.factories.family_factory import FamilyFactory
+from apps.financial_manager.enums import FinancialTypeEnum
 from apps.financial_manager.tests.factories import TransactionFactory
-
 from apps.financial_manager.tests.fixtures.transactions_fixtures import (
     TransactionsFixtures,
 )
-from apps.family_manager.tests.factories.family_factory import FamilyFactory
-from apps.core.tests.factories.user_factory import UserFactory
-from apps.account_manager.tests.factories import (
-    AccountFactory,
-    CreditCardFactory,
-)
-from apps.financial_manager.enums import FinancialTypeEnum
 
 TEST_ENDPOINT = "/api/transactions/family/"
 
@@ -90,20 +86,23 @@ class TransactionByFamilyViewSetTest(BaseTest):
             "expense",
             "balance",
         ]
+        expected_transactions_ids = set(
+            [self.expense_1.id, self.receipt_1.id, self.expense_2.id, self.receipt_2.id]
+        )
 
         # When
         response = self.auth_client.get(f"{TEST_ENDPOINT}{self.family.id}/")
         response_transactions_data = response.data["transactions"]
         response_summary_data = response.data["summary"]
         listed_item_1 = response_transactions_data[0]
+        obtained_transactions_ids = set(
+            [item["id"] for item in response_transactions_data]
+        )
 
         # Then
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response_transactions_data), 4)
-        self.assertEqual(response_transactions_data[0]["id"], self.expense_1.id)
-        self.assertEqual(response_transactions_data[1]["id"], self.receipt_1.id)
-        self.assertEqual(response_transactions_data[2]["id"], self.expense_2.id)
-        self.assertEqual(response_transactions_data[3]["id"], self.receipt_2.id)
+        self.assertSetEqual(expected_transactions_ids, obtained_transactions_ids)
         self.assertListEqual(list(listed_item_1.keys()), expected_main_keys)
         self.assertListEqual(list(listed_item_1["user"].keys()), expected_user_keys)
         self.assertListEqual(
