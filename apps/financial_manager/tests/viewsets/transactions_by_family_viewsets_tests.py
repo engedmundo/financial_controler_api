@@ -106,16 +106,16 @@ class TransactionByFamilyViewSetTest(BaseTest):
         self.assertListEqual(list(listed_item_1.keys()), expected_main_keys)
         self.assertListEqual(list(listed_item_1["user"].keys()), expected_user_keys)
         self.assertListEqual(
-            list(listed_item_1["account"].keys()), expected_account_keys
+            list(listed_item_1["account"].keys()), expected_account_keys,
         )
         self.assertListEqual(
-            list(listed_item_1["credit_card"].keys()), expected_credit_card_keys
+            list(listed_item_1["credit_card"].keys()), expected_credit_card_keys,
         )
         self.assertListEqual(
-            list(listed_item_1["category"].keys()), expected_category_keys
+            list(listed_item_1["category"].keys()), expected_category_keys,
         )
         self.assertListEqual(
-            list(listed_item_1["category"].keys()), expected_category_keys
+            list(listed_item_1["category"].keys()), expected_category_keys,
         )
         self.assertListEqual(list(response_summary_data.keys()), expected_summary_keys)
 

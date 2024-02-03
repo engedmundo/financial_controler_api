@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG")
 
-ALLOWED_HOSTS = ["*", ".vercel.app"]
+ALLOWED_HOSTS = ["localhost", ".vercel.app"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -106,6 +106,7 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://financial-controler-web.vercel.app/login",
 ]
 
 LANGUAGE_CODE = "pt-br"
