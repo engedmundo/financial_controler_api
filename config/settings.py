@@ -8,7 +8,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG")
 
-ALLOWED_HOSTS = ["localhost", ".vercel.app", config("AWS_IP")]
+ALLOWED_HOSTS = [
+    "localhost",
+    ".vercel.app",
+    config("AWS_IP"),
+    config("VERCEL_FRONT_APP"),
+    ]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
