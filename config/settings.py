@@ -106,7 +106,7 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://financial-controler-web.vercel.app/login",
+    "https://financial-controler-web.vercel.app",
 ]
 
 LANGUAGE_CODE = "pt-br"
