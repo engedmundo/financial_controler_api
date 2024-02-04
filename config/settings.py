@@ -12,7 +12,7 @@ ALLOWED_HOSTS = [
     "localhost",
     ".vercel.app",
     config("AWS_IP"),
-    config("VERCEL_FRONT_APP"),
+    "127.0.0.1",
     ]
 
 INSTALLED_APPS = [
@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "corsheaders",
-    "sslserver",
     # project apps
     "apps.core",
     "apps.family_manager",
@@ -44,8 +43,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-    # ... others middlewares ...
-    "sslserver.middleware.SSLRedirectMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -113,8 +110,8 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "https://financial-controler-web.vercel.app",
+    "http://localhost:3000",
+    "http://127.0.0.1",
 ]
 
 LANGUAGE_CODE = "pt-br"
@@ -135,6 +132,3 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
