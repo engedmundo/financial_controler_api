@@ -6,6 +6,7 @@ from apps.account_manager.tests.factories import (
 from apps.financial_manager.enums import FinancialTypeEnum
 from apps.financial_manager.models import Transaction
 from apps.financial_manager.tests.factories import CategoryFactory, TransactionFactory
+from apps.family_manager.tests.factories import FamilyFactory
 
 
 class TransactionsFixtures:
@@ -17,6 +18,8 @@ class TransactionsFixtures:
         self.account = AccountFactory(user=self.user, bank=self.bank)
         self.card = CreditCardFactory(user=self.user, bank=self.bank)
         self.category = CategoryFactory(user=self.user)
+        self.family = FamilyFactory()
+        self.family.members.add(self.user)
 
     def create_expense_transaction(self) -> Transaction:
         return TransactionFactory(

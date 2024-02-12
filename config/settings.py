@@ -9,10 +9,7 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG")
 
 ALLOWED_HOSTS = [
-    "localhost",
-    ".vercel.app",
-    config("AWS_IP"),
-    "127.0.0.1",
+    "*",
 ]
 
 INSTALLED_APPS = [
@@ -73,10 +70,6 @@ DATABASES = {
         "PASSWORD": config("DB_PASSWORD"),
         "HOST": config("DB_HOST"),
         "PORT": config("DB_PORT"),
-        # for elefantSQL
-        # 'OPTIONS': {
-        #     'sslmode': 'require',
-        # },
     }
 }
 
