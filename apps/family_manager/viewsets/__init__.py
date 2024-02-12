@@ -1,1 +1,1 @@
-from .family_viewset import FamilyViewSet
+from .my_family_viewset import MyFamilyViewSet

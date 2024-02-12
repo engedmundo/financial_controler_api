@@ -13,7 +13,7 @@ ALLOWED_HOSTS = [
     ".vercel.app",
     config("AWS_IP"),
     "127.0.0.1",
-    ]
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
