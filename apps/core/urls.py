@@ -21,4 +21,5 @@ urlpatterns = [
         TokenVerifyView.as_view(),
         name="token_verify",
     ),
+    
 ]

@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "apps.family_manager",
     "apps.account_manager",
     "apps.financial_manager",
+    "apps.interface_manager",
 ]
 
 MIDDLEWARE = [

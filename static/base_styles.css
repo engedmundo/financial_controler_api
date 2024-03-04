@@ -1,0 +1,51 @@
+:root {
+    --color-body-bg: #f5f5f9;
+    --color-white: #fff;
+    --color-box-shadow: rgba(67,89,113,.12);
+    --color-text-primary: #697a8d;
+    --color-hover-sidebar: rgba(67, 89, 113, 0.1);
+}
+
+/* reset styles */
+body {
+    background-color: var(--color-body-bg);
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+/* sidebar */
+
+.sidebar {
+    width: 250px;
+    background-color: var(--color-white);
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 0 4px 6px 0 var(--color-box-shadow);
+}
+
+.sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    padding: 10px;
+}
+
+.sidebar-menu li a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar-menu li a:hover {
+    background-color: var(--color-hover-sidebar);
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
