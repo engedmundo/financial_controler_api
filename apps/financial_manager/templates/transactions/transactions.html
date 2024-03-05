@@ -1,0 +1,11 @@
+{% extends "admin/change_list.html" %}
+
+    {% block object-tools %}
+        <div>
+            <form action="{% url 'transactions-report' %}" method="POST">
+                {% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="Ver relatório">
+            </form>
+        </div>
+    {{ block.super }}
+{% endblock %}

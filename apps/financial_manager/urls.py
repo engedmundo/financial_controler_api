@@ -8,6 +8,7 @@ from apps.financial_manager.viewsets import (
     TransactionCSVViewSet,
     TransactionViewSet,
 )
+from apps.financial_manager.views import TransactionsReportView
 
 router = DefaultRouter()
 router.register(r"budgets", BudgetViewSet, basename="budget")
@@ -33,6 +34,11 @@ urlpatterns = [
         CategoryViewSet.as_view(),
         name="categories",
     ),
+    path(
+        "transactions/report/",
+        TransactionsReportView.as_view(),
+        name="transactions-report",
+    )
 ]
 
 urlpatterns += router.urls
