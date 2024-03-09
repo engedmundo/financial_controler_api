@@ -2,8 +2,11 @@
 
 {% block content %}
   <div class="container-fluid">
-    <div class="row mb-2">
+    <div class="row">
       <h1 class="ml-2">Relatório de Transações</h1>
+    </div>
+    <div class="row">
+      <p class="ml-2">{{ start_date|date:'d/m/Y' }} - {{ end_date|date:'d/m/Y' }}</p>
     </div>
 
     <div class="row">
@@ -100,30 +103,129 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row d-flex align-items-stretch">
       <div class="col-sm">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-body">
-            <h3 class="card-title">Receitas</h3>
-            
+            <h3>Receitas</h3>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Categoria</th>
+                  <th class="text-right" scope="col">Valor</th>
+                  <th class="text-right" scope="col">%</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for category in summary.receipt.categories %}
+                  <tr>
+                    <th scope="row">{{ category.category }}</th>
+                    <td class="text-right">R$ {{ category.total }}</td>
+                    <td class="text-right">{{ category.percentual }} %</td>
+                  </tr>
+                {% endfor %}
+                <tr>
+                  <th scope="row">Total</th>
+                  <td class="text-right">R$ {{ summary.receipt.total }}</td>
+                  <td class="text-right">100 %</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
       <div class="col-sm">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-body">
-            <h3 class="card-title">Despesas</h3> 
-          </div>
-        </div>
-      </div>
-      <div class="col-sm">
-        <div class="card">
-          <div class="card-body">
-            <h3 class="card-title">Consolidado</h3>
+            <h3>Despesas</h3>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Categoria</th>
+                  <th class="text-right" scope="col">Valor</th>
+                  <th class="text-right" scope="col">%</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for category in summary.expense.categories %}
+                  <tr>
+                    <td>{{ category.category }}</th>
+                    <td class="text-right">R$ {{ category.total }}</td>
+                    <td class="text-right">{{ category.percentual }} %</td>
+                  </tr>
+                {% endfor %}
+                <tr>
+                  <th scope="row">Total</th>
+                  <td class="text-right">R$ {{ summary.expense.total }}</td>
+                  <td class="text-right">100%</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-      
+
+    <div class="row mt-3">
+      <div class="col-sm">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="row">
+              <h3>Saldo do período</h3>
+            </div>
+            <div class="row">
+              <p>R$ {{summary.balance}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-sm">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="row">
+              <h3>Transações do período</h3>
+            </div>
+            <div class="row">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Data</th>
+                    <th scope="col">Descrição</th>
+                    <th class="text-right" scope="col">Valor</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Conta</th>
+                    <th scope="col">Cartão de crédito</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for transaction in transactions %}
+                    <tr>
+                      <td>{{ transaction.date|date:'d/m/Y'  }}</th>
+                      <td>{{ transaction.description }}</th>
+                      <td class="text-right">R$ {{ transaction.amount }}</td>
+                      <td>{{ transaction.category.name }}</td>
+                      {% if transaction.type == "receipt" %}
+                        <td>Receita</td>
+                      {% else %}
+                        <td>Despesa</td>
+                      {% endif %}
+                      <td>{{ transaction.user.first_name }}</td>
+                      <td>{{ transaction.account.name }}</td>
+                      <td>{{ transaction.credit_card.name }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 {% endblock %}

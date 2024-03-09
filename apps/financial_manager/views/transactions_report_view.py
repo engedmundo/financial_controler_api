@@ -46,11 +46,13 @@ class TransactionsReportView(View):
         display_family = request.GET.get("display_family", "False")
         display_family = display_family.lower() == "true"
 
-        display_receipt = request.GET.get("display_receipt", "True")
-        display_receipt = display_receipt.lower() == "true"
+        display_receipt = (
+            False if not request.GET.get("display_receipt") else True
+        )
 
-        display_expense = request.GET.get("display_expense", "True")
-        display_expense = display_expense.lower() == "true"
+        display_expense = (
+            False if not request.GET.get("display_expense") else True
+        )
 
         return {
             "start_date": start_date,
