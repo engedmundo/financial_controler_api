@@ -29,7 +29,9 @@ class BankViewSetTest(BaseTest):
 
     def test_get_banks_unauthenticated(self):
         # Given
-        expected_message = "As credenciais de autenticação não foram fornecidas."
+        expected_message = (
+            "As credenciais de autenticação não foram fornecidas."
+        )
 
         # When
         response = APIClient().get(TEST_ENDPOINT)

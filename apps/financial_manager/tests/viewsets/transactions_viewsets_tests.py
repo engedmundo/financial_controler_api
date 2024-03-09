@@ -1,10 +1,15 @@
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from apps.account_manager.tests.factories import AccountFactory, CreditCardFactory
+from apps.account_manager.tests.factories import (
+    AccountFactory,
+    CreditCardFactory,
+)
 from apps.core.tests.base_test import BaseTest
 from apps.core.tests.factories.user_factory import UserFactory
-from apps.financial_manager.tests.factories.category_factory import CategoryFactory
+from apps.financial_manager.tests.factories.category_factory import (
+    CategoryFactory,
+)
 from apps.financial_manager.tests.fixtures.transactions_fixtures import (
     TransactionsFixtures,
 )
@@ -95,7 +100,9 @@ class TransactionViewSetTest(BaseTest):
 
     def test_get_transactions_unauthenticated(self):
         # Given
-        expected_message = "As credenciais de autenticação não foram fornecidas."
+        expected_message = (
+            "As credenciais de autenticação não foram fornecidas."
+        )
 
         # When
         response = APIClient().get(TEST_ENDPOINT)

@@ -1,6 +1,8 @@
 from apps.core.tests.base_test import BaseTest
 from apps.financial_manager.models import Transaction
-from apps.financial_manager.services.transaction_service import TransactionService
+from apps.financial_manager.services.transaction_service import (
+    TransactionService,
+)
 from apps.financial_manager.tests.fixtures.transactions_fixtures import (
     TransactionsFixtures,
 )
@@ -71,7 +73,9 @@ class TransactionServiceTest(BaseTest):
         self.assertEqual(resp["expense"]["total"], self.expense.amount)
         self.assertEqual(resp["balance"], expected_balance)
         self.assertListEqual(list(resp.keys()), expected_main_keys)
-        self.assertListEqual(list(resp["receipt"].keys()), expected_secondary_keys)
+        self.assertListEqual(
+            list(resp["receipt"].keys()), expected_secondary_keys
+        )
 
     def test_get_transaction_summary_without_data(self):
         # Given

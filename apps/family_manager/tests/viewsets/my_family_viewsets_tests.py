@@ -44,7 +44,11 @@ class MyFamilyViewSetTest(BaseTest):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(expected_family_id, response_data["id"])
         self.assertListEqual(list(response_data.keys()), expected_main_keys)
-        self.assertListEqual(list(response_members[0].keys()), expected_members_keys)
-        self.assertListEqual(list(response_members[1].keys()), expected_members_keys)
+        self.assertListEqual(
+            list(response_members[0].keys()), expected_members_keys
+        )
+        self.assertListEqual(
+            list(response_members[1].keys()), expected_members_keys
+        )
         self.assertEqual(member_0["id"], self.user.id)
         self.assertEqual(member_1["id"], self.family_member.id)

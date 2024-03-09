@@ -3,10 +3,13 @@ from apps.account_manager.tests.factories import (
     BankFactory,
     CreditCardFactory,
 )
+from apps.family_manager.tests.factories import FamilyFactory
 from apps.financial_manager.enums import FinancialTypeEnum
 from apps.financial_manager.models import Transaction
-from apps.financial_manager.tests.factories import CategoryFactory, TransactionFactory
-from apps.family_manager.tests.factories import FamilyFactory
+from apps.financial_manager.tests.factories import (
+    CategoryFactory,
+    TransactionFactory,
+)
 
 
 class TransactionsFixtures:

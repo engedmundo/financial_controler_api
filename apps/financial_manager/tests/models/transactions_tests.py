@@ -1,9 +1,15 @@
 import pytest
 
-from apps.account_manager.tests.factories import AccountFactory, CreditCardFactory
+from apps.account_manager.tests.factories import (
+    AccountFactory,
+    CreditCardFactory,
+)
 from apps.core.tests.base_test import BaseModelsTest
 from apps.financial_manager.models import Transaction
-from apps.financial_manager.tests.factories import CategoryFactory, TransactionFactory
+from apps.financial_manager.tests.factories import (
+    CategoryFactory,
+    TransactionFactory,
+)
 
 
 class TransactionModelTests(BaseModelsTest):
@@ -47,7 +53,9 @@ class TransactionModelTests(BaseModelsTest):
                 db_transaction_attr = getattr(db_transaction, attr_name)
 
                 if attr_name == "date":
-                    db_transaction_attr = db_transaction_attr.strftime("%Y-%m-%d")
+                    db_transaction_attr = db_transaction_attr.strftime(
+                        "%Y-%m-%d"
+                    )
 
                 self.assertEqual(transaction_attr, db_transaction_attr)
 

@@ -5,7 +5,6 @@ from rest_framework.views import APIView
 
 from apps.account_manager.models import CreditCard
 from apps.account_manager.seralizers import CreditCardSerializer
-from rest_framework.permissions import IsAuthenticated
 
 
 class CreditCardViewSet(APIView):

@@ -1,7 +1,7 @@
 from django.contrib import admin
+from django.contrib.auth.models import User
 
 from apps.account_manager.models import CreditCard
-from django.contrib.auth.models import User
 
 
 @admin.register(CreditCard)

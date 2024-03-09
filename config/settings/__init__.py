@@ -5,10 +5,20 @@ from .installed_apps import INSTALLED_APPS
 from .jazzmin_settings import JAZZMIN_SETTINGS
 from .middleware import MIDDLEWARE
 from .rest_framework import REST_FRAMEWORK
-from .security import (ALLOWED_HOSTS, AUTH_PASSWORD_VALIDATORS,
-                       CORS_ALLOWED_ORIGINS, DEBUG, SECRET_KEY)
+from .security import (
+    ALLOWED_HOSTS,
+    AUTH_PASSWORD_VALIDATORS,
+    CORS_ALLOWED_ORIGINS,
+    DEBUG,
+    SECRET_KEY,
+)
 from .simple_jwt import SIMPLE_JWT
-from .static import (BASE_DIR, STATIC_ROOT, STATIC_URL, STATICFILES_DIRS,
-                     TEMPLATES)
+from .static import (
+    BASE_DIR,
+    STATIC_ROOT,
+    STATIC_URL,
+    STATICFILES_DIRS,
+    TEMPLATES,
+)
 from .urls import ROOT_URLCONF
 from .wsgi_config import WSGI_APPLICATION

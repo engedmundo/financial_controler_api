@@ -1,6 +1,7 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
+from apps.financial_manager.views import TransactionsReportView
 from apps.financial_manager.viewsets import (
     BudgetViewSet,
     CategoryViewSet,
@@ -8,7 +9,6 @@ from apps.financial_manager.viewsets import (
     TransactionCSVViewSet,
     TransactionViewSet,
 )
-from apps.financial_manager.views import TransactionsReportView
 
 router = DefaultRouter()
 router.register(r"budgets", BudgetViewSet, basename="budget")
@@ -38,7 +38,7 @@ urlpatterns = [
         "transactions/report/",
         TransactionsReportView.as_view(),
         name="transactions-report",
-    )
+    ),
 ]
 
 urlpatterns += router.urls

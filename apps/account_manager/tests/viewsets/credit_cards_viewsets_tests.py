@@ -43,12 +43,18 @@ class CreditCardViewSetTest(BaseTest):
         self.assertEqual(response_data[0]["id"], credit_card_1.id)
         self.assertEqual(response_data[1]["id"], credit_card_2.id)
         self.assertListEqual(list(listed_item_1.keys()), expected_main_keys)
-        self.assertListEqual(list(listed_item_1["user"].keys()), expected_user_keys)
-        self.assertListEqual(list(listed_item_1["bank"].keys()), expected_bank_keys)
+        self.assertListEqual(
+            list(listed_item_1["user"].keys()), expected_user_keys
+        )
+        self.assertListEqual(
+            list(listed_item_1["bank"].keys()), expected_bank_keys
+        )
 
     def test_get_accounts_unauthenticated(self):
         # Given
-        expected_message = "As credenciais de autenticação não foram fornecidas."
+        expected_message = (
+            "As credenciais de autenticação não foram fornecidas."
+        )
 
         # When
         response = APIClient().get(TEST_ENDPOINT)

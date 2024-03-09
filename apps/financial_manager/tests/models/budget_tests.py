@@ -1,8 +1,11 @@
 import pytest
 
-from apps.financial_manager.models import Budget
-from apps.financial_manager.tests.factories import BudgetFactory, CategoryFactory
 from apps.core.tests.base_test import BaseModelsTest
+from apps.financial_manager.models import Budget
+from apps.financial_manager.tests.factories import (
+    BudgetFactory,
+    CategoryFactory,
+)
 
 
 class BudgetModelTests(BaseModelsTest):
@@ -46,7 +49,8 @@ class BudgetModelTests(BaseModelsTest):
 
 
 @pytest.mark.parametrize(
-    "attr_name", ["user", "category", "amount", "month", "year", "type", "description"]
+    "attr_name",
+    ["user", "category", "amount", "month", "year", "type", "description"],
 )
 def test_create_budgets_raise_exception_without_required_fields(attr_name):
     # Given

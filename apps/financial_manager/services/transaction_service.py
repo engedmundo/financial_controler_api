@@ -50,7 +50,9 @@ class TransactionService:
             {
                 "category": category_name,
                 "total": total,
-                "percentual": self._calculate_percentual(total, self.total_receipt),
+                "percentual": self._calculate_percentual(
+                    total, self.total_receipt
+                ),
             }
             for category_name, total in receipts_by_category_dict.items()
         ]
@@ -72,7 +74,9 @@ class TransactionService:
             {
                 "category": category_name,
                 "total": total,
-                "percentual": self._calculate_percentual(total, self.total_expense),
+                "percentual": self._calculate_percentual(
+                    total, self.total_expense
+                ),
             }
             for category_name, total in expenses_by_category_dict.items()
         ]

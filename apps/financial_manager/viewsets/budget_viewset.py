@@ -1,8 +1,8 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from apps.financial_manager.models import Budget
 from apps.financial_manager.serializers import BudgetSerializer
-from rest_framework.permissions import IsAuthenticated
 
 
 class BudgetViewSet(viewsets.ModelViewSet):

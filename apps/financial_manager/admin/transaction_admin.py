@@ -6,7 +6,7 @@ from apps.financial_manager.models import Transaction
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    change_list_template = "transactions/transactions.html" 
+    change_list_template = "transactions/transactions.html"
 
     list_display = [
         "account",

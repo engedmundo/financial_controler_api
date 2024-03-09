@@ -2,8 +2,7 @@
 
     {% block object-tools %}
         <div>
-            <form action="{% url 'transactions-report' %}" method="POST">
-                {% csrf_token %}
+            <form action="{% url 'transactions-report' %}" method="GET">
                 <input class="btn btn-primary" type="submit" value="Ver relatório">
             </form>
         </div>
