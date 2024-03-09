@@ -21,14 +21,20 @@
                     class="form-control" 
                     id="start_date" 
                     name="start_date"
-                    value="{{ start_date }}"
+                    value="{{ start_date|date:'Y-m-d' }}"
                   >
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="end_date">Data Final</label>
-                  <input type="date" class="form-control" id="end_date" name="end_date">
+                  <input 
+                    type="date"
+                    class="form-control"
+                    id="end_date" 
+                    name="end_date"
+                    value="{{ end_date|date:'Y-m-d' }}"
+                  >
                 </div>
               </div>
             </div>
@@ -40,21 +46,52 @@
                   readonly 
                   class="form-control-plaintext" 
                   id="static_user" 
-                  value="Usuário"
+                  value="{{ request.user.first_name }} {{ request.user.last_name }}"
                   name="static_user"
                 >
               </div>
-              <div class="form-check col-5 ml-2">
-                <input 
-                  class="form-check-input"
-                  type="checkbox"
-                  value="TESTE"
-                  id="display_family"
-                  name="display_family"
-                >
-                <label class="form-check-label" for="display_family">
-                  Mostrar dados da Família
-                </label>
+              <div class="form-check col-5">
+                <div class="row ml-2">
+                  <input 
+                    class="form-check-input"
+                    type="checkbox" 
+                    value="True"
+                    id="display_family"
+                    name="display_family"
+                    {% if display_family %} checked {% endif %}
+                  >                
+                  <label class="form-check-label" for="display_family">
+                    Mostrar dados da Família
+                  </label>
+                </div>
+
+                <div class="row ml-2">
+                  <input 
+                    class="form-check-input"
+                    type="checkbox" 
+                    value="True"
+                    id="display_receipt"
+                    name="display_receipt"
+                    {% if display_receipt %} checked {% endif %}
+                  >                
+                  <label class="form-check-label" for="display_receipt">
+                    Mostrar Receitas
+                  </label>
+                </div>
+
+                <div class="row ml-2">
+                  <input 
+                    class="form-check-input"
+                    type="checkbox" 
+                    value="True"
+                    id="display_expense"
+                    name="display_expense"
+                    {% if display_expense %} checked {% endif %}
+                  >                
+                  <label class="form-check-label" for="display_expense">
+                    Mostrar Despesas
+                  </label>
+                </div>
               </div>
             </div>
             <button type="submit" class="btn btn-primary mb-4">Filtrar</button>
