@@ -4,7 +4,8 @@ from django.db.models.query import QuerySet
 
 from apps.family_manager.models import Family
 from apps.financial_manager.enums import FinancialTypeEnum
-from apps.financial_manager.models import Transaction
+from apps.financial_manager.models import Transaction, Category
+from apps.account_manager.models import Account, CreditCard
 
 
 class TransactionService:
@@ -162,3 +163,50 @@ class TransactionService:
             return 100
 
         return round(category_value / total_value * 100, 2)
+
+    def get_family(self, user: User) -> Family:
+        return Family.objects.filter(
+            members=user,
+        ).first()
+
+    def get_family_members(self, family: Family) -> dict:
+        family_members = dict()
+        for member in family.members.all():
+            family_members[member.first_name] = member
+        
+        return family_members
+
+    def get_accounts(self, family: Family) -> dict:
+        accounts = Account.objects.filter(
+            user_in=family.members.all(),
+        )
+        accounts_dict = dict()
+
+        for account in accounts:
+            accounts_dict[account.name] = account
+
+        return accounts_dict
+
+    def get_credit_cards(self, family: Family) -> dict:
+        credit_cards = CreditCard.objects.filter(
+            user_in=family.members.all(),
+        )
+        credit_cards_dict = dict()
+
+        for credit_card in credit_cards:
+            credit_cards_dict[credit_card.name] = credit_card
+
+        return credit_cards_dict
+    
+    def get_category_names(self, family: Family) -> dict:
+        categories = Category.objects.filter(
+            user_in=family.members.all(),
+        )
+        category_names = dict()
+
+        for category in categories:
+            category_names[category.name] = category
+
+        return category_names
+    
+    
