@@ -2,7 +2,6 @@ from .database import DATABASES
 from .default_auto_field import DEFAULT_AUTO_FIELD
 from .i18n import LANGUAGE_CODE, TIME_ZONE, USE_I18N, USE_TZ
 from .installed_apps import INSTALLED_APPS
-from .jazzmin_settings import JAZZMIN_SETTINGS
 from .middleware import MIDDLEWARE
 from .rest_framework import REST_FRAMEWORK
 from .security import (

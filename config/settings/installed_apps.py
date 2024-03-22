@@ -1,6 +1,4 @@
 INSTALLED_APPS = [
-    # django admin custom
-    "jazzmin",
     # django default apps
     "django.contrib.admin",
     "django.contrib.auth",
