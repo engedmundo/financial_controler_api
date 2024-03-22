@@ -1,8 +1,8 @@
 import pytest
 
+from apps.core.tests.base_test import BaseModelsTest
 from apps.financial_manager.models import Category
 from apps.financial_manager.tests.factories import CategoryFactory
-from apps.core.tests.base_test import BaseModelsTest
 
 
 class CategoryModelTests(BaseModelsTest):

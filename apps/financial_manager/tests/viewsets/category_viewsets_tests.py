@@ -2,8 +2,12 @@ from rest_framework import status
 
 from apps.core.tests.base_test import BaseTest
 from apps.core.tests.factories.user_factory import UserFactory
-from apps.financial_manager.tests.factories.category_factory import CategoryFactory
-from apps.financial_manager.tests.fixtures.category_fixtures import CategoryFixtures
+from apps.financial_manager.tests.factories.category_factory import (
+    CategoryFactory,
+)
+from apps.financial_manager.tests.fixtures.category_fixtures import (
+    CategoryFixtures,
+)
 
 TEST_ENDPOINT = "/api/categories/"
 

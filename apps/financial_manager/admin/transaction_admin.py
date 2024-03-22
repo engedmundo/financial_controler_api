@@ -6,6 +6,8 @@ from apps.financial_manager.models import Transaction
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
+    change_list_template = "transactions/transactions.html"
+
     list_display = [
         "account",
         "credit_card",
@@ -19,4 +21,5 @@ class TransactionAdmin(admin.ModelAdmin):
     list_filter = (
         ("date", DateRangeFilter),
         "date",
+        "category",
     )

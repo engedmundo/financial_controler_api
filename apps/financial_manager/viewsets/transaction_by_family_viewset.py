@@ -6,7 +6,9 @@ from rest_framework.views import APIView
 from apps.family_manager.models import Family
 from apps.financial_manager.models import Transaction
 from apps.financial_manager.serializers import TransactionSerializer
-from apps.financial_manager.services.transaction_service import TransactionService
+from apps.financial_manager.services.transaction_service import (
+    TransactionService,
+)
 
 
 class TransactionByFamilyViewSet(APIView):

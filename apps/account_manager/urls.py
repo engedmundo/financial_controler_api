@@ -9,7 +9,9 @@ from apps.account_manager.viewsets import (
 )
 
 router = DefaultRouter()
-router.register(r"account-histories", AccountHistoryViewSet, basename="account-history")
+router.register(
+    r"account-histories", AccountHistoryViewSet, basename="account-history"
+)
 
 urlpatterns = [
     path("banks/", BankViewSet.as_view(), name="banks"),

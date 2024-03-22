@@ -52,11 +52,17 @@ class TransactionCSVService:
         transactions_df["date"] = pd.to_datetime(
             transactions_df["date"], format="%d/%m/%Y"
         )
-        transactions_df["date"] = transactions_df["date"].dt.strftime("%Y-%m-%d")
+        transactions_df["date"] = transactions_df["date"].dt.strftime(
+            "%Y-%m-%d"
+        )
 
         # convert amount to decimal value
-        transactions_df["amount"] = transactions_df["amount"].str.replace(".", "")
-        transactions_df["amount"] = transactions_df["amount"].str.replace(",", ".")
+        transactions_df["amount"] = transactions_df["amount"].str.replace(
+            ".", ""
+        )
+        transactions_df["amount"] = transactions_df["amount"].str.replace(
+            ",", "."
+        )
         transactions_df["amount"] = pd.to_numeric(
             transactions_df["amount"], errors="coerce"
         )

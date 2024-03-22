@@ -3,11 +3,16 @@ import random
 import factory
 from faker import Faker
 
-from apps.account_manager.tests.factories import AccountFactory, CreditCardFactory
+from apps.account_manager.tests.factories import (
+    AccountFactory,
+    CreditCardFactory,
+)
 from apps.core.tests.factories.user_factory import UserFactory
 from apps.financial_manager.enums import FinancialTypeEnum
 from apps.financial_manager.models.transaction import Transaction
-from apps.financial_manager.tests.factories.category_factory import CategoryFactory
+from apps.financial_manager.tests.factories.category_factory import (
+    CategoryFactory,
+)
 
 fake = Faker("pt_BR")
 

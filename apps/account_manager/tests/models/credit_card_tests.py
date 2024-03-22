@@ -39,7 +39,9 @@ class CreditCardModelTests(BaseModelsTest):
     def test_credit_card_model_meta_verbose_names(self):
         # Then
         self.assertEqual(CreditCard._meta.verbose_name, "Cartão de crédito")
-        self.assertEqual(CreditCard._meta.verbose_name_plural, "Cartões de crédito")
+        self.assertEqual(
+            CreditCard._meta.verbose_name_plural, "Cartões de crédito"
+        )
 
 
 @pytest.mark.parametrize("attr_name", ["user", "bank", "name", "payment_day"])

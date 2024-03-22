@@ -1,7 +1,10 @@
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from apps.account_manager.tests.factories import AccountFactory, CreditCardFactory
+from apps.account_manager.tests.factories import (
+    AccountFactory,
+    CreditCardFactory,
+)
 from apps.core.tests.base_test import BaseTest
 from apps.core.tests.factories.user_factory import UserFactory
 from apps.family_manager.tests.factories.family_factory import FamilyFactory
@@ -24,8 +27,12 @@ class TransactionByFamilyViewSetTest(BaseTest):
 
         # other family member data
         self.family_member = UserFactory()
-        self.account_fm = AccountFactory(user=self.family_member, bank=fixtures.bank)
-        self.card_fm = CreditCardFactory(user=self.family_member, bank=fixtures.bank)
+        self.account_fm = AccountFactory(
+            user=self.family_member, bank=fixtures.bank
+        )
+        self.card_fm = CreditCardFactory(
+            user=self.family_member, bank=fixtures.bank
+        )
         self.expense_2 = TransactionFactory(
             user=self.family_member,
             account=self.account_fm,
@@ -87,7 +94,12 @@ class TransactionByFamilyViewSetTest(BaseTest):
             "balance",
         ]
         expected_transactions_ids = set(
-            [self.expense_1.id, self.receipt_1.id, self.expense_2.id, self.receipt_2.id]
+            [
+                self.expense_1.id,
+                self.receipt_1.id,
+                self.expense_2.id,
+                self.receipt_2.id,
+            ]
         )
 
         # When
@@ -102,9 +114,13 @@ class TransactionByFamilyViewSetTest(BaseTest):
         # Then
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response_transactions_data), 4)
-        self.assertSetEqual(expected_transactions_ids, obtained_transactions_ids)
+        self.assertSetEqual(
+            expected_transactions_ids, obtained_transactions_ids
+        )
         self.assertListEqual(list(listed_item_1.keys()), expected_main_keys)
-        self.assertListEqual(list(listed_item_1["user"].keys()), expected_user_keys)
+        self.assertListEqual(
+            list(listed_item_1["user"].keys()), expected_user_keys
+        )
         self.assertListEqual(
             list(listed_item_1["account"].keys()),
             expected_account_keys,
@@ -121,7 +137,9 @@ class TransactionByFamilyViewSetTest(BaseTest):
             list(listed_item_1["category"].keys()),
             expected_category_keys,
         )
-        self.assertListEqual(list(response_summary_data.keys()), expected_summary_keys)
+        self.assertListEqual(
+            list(response_summary_data.keys()), expected_summary_keys
+        )
 
     def test_get_transactions_by_family_whitout_family(self):
         # Given
@@ -136,7 +154,9 @@ class TransactionByFamilyViewSetTest(BaseTest):
 
     def test_get_transactions_by_family_unauthenticated(self):
         # Given
-        expected_message = "As credenciais de autenticação não foram fornecidas."
+        expected_message = (
+            "As credenciais de autenticação não foram fornecidas."
+        )
 
         # When
         response = APIClient().get(f"{TEST_ENDPOINT}{self.family.id}/")

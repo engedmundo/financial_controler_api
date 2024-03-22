@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from apps.family_manager.models import Family
 from apps.core.serializers.user_simple_serializer import UserSimpleSerializer
+from apps.family_manager.models import Family
 
 
 class FamilySerializer(serializers.ModelSerializer):

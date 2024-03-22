@@ -1,10 +1,11 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from apps.family_manager.models import Family
 from apps.financial_manager.models import Category
 from apps.financial_manager.serializers import CategorySimpleSerializer
-from rest_framework.permissions import IsAuthenticated
-from apps.family_manager.models import Family
 
 
 class CategoryViewSet(APIView):

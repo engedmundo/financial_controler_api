@@ -1,13 +1,14 @@
+from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework import status
 from rest_framework.test import APIClient
 
 from apps.core.tests.base_test import BaseTest
-
+from apps.financial_manager.tests.factories.category_factory import (
+    CategoryFactory,
+)
 from apps.financial_manager.tests.fixtures.transactions_fixtures import (
     TransactionsFixtures,
 )
-from apps.financial_manager.tests.factories.category_factory import CategoryFactory
-from django.core.files.uploadedfile import SimpleUploadedFile
 
 TEST_ENDPOINT = "/api/transactions/csv/"
 
@@ -72,7 +73,9 @@ class TransactionCSVViewSetTest(BaseTest):
 
     def test_post_csv_transactions_unauthenticated(self):
         # Given
-        expected_message = "As credenciais de autenticação não foram fornecidas."
+        expected_message = (
+            "As credenciais de autenticação não foram fornecidas."
+        )
 
         # When
         response = APIClient().post(TEST_ENDPOINT)
