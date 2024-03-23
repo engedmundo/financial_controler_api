@@ -1,7 +1,10 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from apps.financial_manager.views import TransactionsReportView, LoadTransactionsSpreadsheetView
+from apps.financial_manager.views import (
+    TransactionsReportView,
+    LoadTransactionsSpreadsheetView,
+)
 from apps.financial_manager.viewsets import (
     BudgetViewSet,
     CategoryViewSet,
@@ -43,7 +46,7 @@ urlpatterns = [
         "transactions/load-spreadsheet/",
         LoadTransactionsSpreadsheetView.as_view(),
         name="transactions-load-spreadsheet",
-    )
+    ),
 ]
 
 urlpatterns += router.urls

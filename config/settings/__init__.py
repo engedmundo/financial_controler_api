@@ -2,6 +2,7 @@ from .database import DATABASES
 from .default_auto_field import DEFAULT_AUTO_FIELD
 from .i18n import LANGUAGE_CODE, TIME_ZONE, USE_I18N, USE_TZ
 from .installed_apps import INSTALLED_APPS
+from .login_logout import LOGIN_REDIRECT_URL, LOGIN_URL
 from .middleware import MIDDLEWARE
 from .rest_framework import REST_FRAMEWORK
 from .security import (

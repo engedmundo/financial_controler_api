@@ -18,13 +18,12 @@ class LoadTransactionsSpreadsheetView(View):
         spreadsheet_service = GoogleSpreadsheetService()
         raw_sheet = spreadsheet_service.read_spreadsheet()
         transaction_service = TransactionService()
-        
+
         family = transaction_service.get_family_members(request.user)
         family_members = transaction_service.get_family_members(family)
         accounts = transaction_service.get_accounts(request.user)
         credit_cards = transaction_service.get_credit_cards(request.user)
         categories = transaction_service.get_category_names()
-
 
         transactions = list()
         for row in raw_sheet[1:]:
@@ -55,5 +54,3 @@ class LoadTransactionsSpreadsheetView(View):
         else:
             # Se o HTTP referer não estiver presente, redireciona para uma URL padrão
             return HttpResponseRedirect("/admin")
-
-

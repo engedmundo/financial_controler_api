@@ -4,8 +4,9 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView,
 )
+
+from apps.core.views import MyLoginView, MyLogoutView
 from apps.core.views.home_view import home_view
-from apps.core.views.login_view import login_view
 
 urlpatterns = [
     path(
@@ -30,7 +31,12 @@ urlpatterns = [
     ),
     path(
         "login/",
-        login_view,
+        MyLoginView.as_view(),
         name="login",
-    )
+    ),
+    path(
+        "logout/",
+        MyLogoutView.as_view(),
+        name="logout",
+    ),
 ]

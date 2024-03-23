@@ -173,7 +173,7 @@ class TransactionService:
         family_members = dict()
         for member in family.members.all():
             family_members[member.first_name] = member
-        
+
         return family_members
 
     def get_accounts(self, family: Family) -> dict:
@@ -197,7 +197,7 @@ class TransactionService:
             credit_cards_dict[credit_card.name] = credit_card
 
         return credit_cards_dict
-    
+
     def get_category_names(self, family: Family) -> dict:
         categories = Category.objects.filter(
             user_in=family.members.all(),
@@ -208,5 +208,3 @@ class TransactionService:
             category_names[category.name] = category
 
         return category_names
-    
-    
